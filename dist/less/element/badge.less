@@ -1,0 +1,206 @@
+// Name:            Badge
+// Description:     Styles the badge to look fancy
+//
+// Component:       `badge`
+//
+// Modifier:        'positive'
+//                  'negative'
+//                  'warning'
+//                  'info'
+//                  'pointing'
+//                  'circular'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@badge__background             : @vars__light-grey-colour;
+@badge__color                  : contrast(@badge__background, #808080);
+@badge__border-radius          : @vars__base--border-radius;
+@badge__margin                 : 0 .125em;
+@badge__padding                : .5em .7em;
+@badge__font-size              : .8571rem;
+
+@badge__positive--background   : @vars__positive-colour;
+@badge__positive--color        : #fff;
+@badge__positive--border-color : darken(@vars__positive-colour, 10%);
+@badge__negative--background   : @vars__negative-colour;
+@badge__negative--color        : #fff;
+@badge__negative--border-color : darken(@vars__negative-colour, 10%);
+@badge__alert--background      : @vars__alert-colour;
+@badge__alert--color           : #fff;
+@badge__alert--border-color    : darken(@vars__alert-colour, 10%);
+@badge__info--background       : @vars__info-colour;
+@badge__info--color            : #fff;
+@badge__info--border-color     : darken(@vars__info-colour, 10%);
+
+/* ========================================================================
+   Component: Badge
+ ========================================================================== */
+
+@{vars__prefix}.e-badge {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    line-height: normal;
+    min-height: 1em;
+    font-size: @badge__font-size;
+    margin: @badge__margin;
+    padding: @badge__padding;
+    background: @badge__background;
+    color: @badge__color;
+    .border-radius(@badge__border-radius);
+    .transition(~"opacity .2s ease,color .2s ease,background .2s ease,box-shadow .2s ease");
+    .hook-badge;
+}
+
+/* Modifier: positive
+ ========================================================================== */
+
+@{vars__prefix}.e-badge.m-positive {
+    background-color: @badge__positive--background;
+    color: @badge__positive--color;
+    border-color: @badge__positive--border-color;
+    .hook-badge-positive;
+}
+
+/* Modifier: negative
+ ========================================================================== */
+
+@{vars__prefix}.e-badge.m-negative {
+    background-color: @badge__negative--background;
+    color: @badge__negative--color;
+    border-color: @badge__negative--border-color;
+    .hook-badge-negative;
+}
+
+/* Modifier: alert
+ ========================================================================== */
+
+@{vars__prefix}.e-badge.m-alert {
+    background-color: @badge__alert--background;
+    color: @badge__alert--color;
+    border-color: @badge__alert--border-color;
+    .hook-badge-alert;
+}
+
+/* Modifier: info
+ ========================================================================== */
+
+@{vars__prefix}.e-badge.m-info {
+    background-color: @badge__info--background;
+    color: @badge__info--color;
+    border-color: @badge__info--border-color;
+    .hook-badge-info;
+}
+
+/* Modifier: pointing
+ ========================================================================== */
+
+@{vars__prefix}.e-badge.is-pointing {
+    .hook-badge-pointing;
+
+    &:before {
+        position: absolute;
+        content: '';
+        z-index: 2;
+        width: 0;
+        height: 0;
+        .hook-badge-pointing-before;
+    }
+
+}
+
+@{vars__prefix}.e-badge.is-pointing.m-up {
+    border: none;
+    margin-top: 1em;
+    .hook-badge-pointing;
+
+    &:before {
+        margin-left: -.4em;
+        top: -.4em;
+        left: 50%;
+        border-left: 0.5em solid transparent;
+        border-right: 0.5em solid transparent;
+        border-bottom: 0.5em solid @badge__background;
+    }
+
+}
+
+@{vars__prefix}.e-badge.is-pointing.m-down {
+    border: none;
+    margin-bottom: 1em;
+
+    &:before {
+        margin-left: -.4em;
+        bottom: -.4em;
+        left: 50%;
+        border-left: 0.5em solid transparent;
+        border-right: 0.5em solid transparent;
+        border-top: 0.5em solid @badge__background;
+    }
+
+}
+
+@{vars__prefix}.e-badge.is-pointing.m-left {
+    border: none;
+    margin-left: .6em;
+    .hook-badge-pointing;
+
+    &:before {
+        margin-top: -.4em;
+        left: -.4em;
+        top: 50%;
+        border-top: 0.5em solid transparent;
+        border-bottom: 0.5em solid transparent;
+        border-right: 0.5em solid @badge__background;
+    }
+
+}
+
+@{vars__prefix}.e-badge.is-pointing.m-right {
+    border: none;
+    margin-right: .6em;
+    .hook-badge-pointing;
+
+    &:before {
+        margin-top: -.4em;
+        right: -.4em;
+        top: 50%;
+        border-top: 0.5em solid transparent;
+        border-bottom: 0.5em solid transparent;
+        border-left: 0.5em solid @badge__background
+    }
+
+}
+
+/* Modifier: circular
+ ========================================================================== */
+
+@{vars__prefix}.e-badge.m-circular {
+    text-align: center;
+    min-width: 25px;
+    padding: 0;
+    min-height: 25px;
+    line-height: 25px;
+    .border-radius(50em);
+    .hook-badge-circular;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-badge-misc;
+
+.hook-badge() {}
+.hook-badge-positive() {}
+.hook-badge-negative() {}
+.hook-badge-alert() {}
+.hook-badge-info() {}
+.hook-badge-circular() {}
+
+.hook-badge-pointing() {}
+.hook-badge-pointing-before() {}
+
+.hook-badge-misc() {}

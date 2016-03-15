@@ -1,0 +1,42 @@
+// Name:            Tab
+// Description:     Styles the tab to look fancy
+//
+// Component:       `tab`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+/* ========================================================================
+   Component: Tab
+ ========================================================================== */
+
+@{vars__prefix}.e-tab.m-target {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    &:target + .e-tab {
+        display: block;
+    }
+
+    &:not(:target) + .e-tab {
+        display: none;
+    }
+
+    &.is-current + .e-tab {
+        display: block;
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-tab-misc;
+
+.hook-tab() {}
+
+.hook-tab-misc() {}

@@ -1,0 +1,155 @@
+// Name:            Message
+// Description:     Styles the message to look fancy
+//
+// Component:       `message`
+//
+// Sub-object:      'close'
+//
+// Modifier:        'positive'
+//                  'negative'
+//                  'warning'
+//                  'info'
+//                  'attached'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@message__background             : @vars__light-grey-colour;
+@message__color                  : contrast(@message__background, #444);
+@message__border-width           : 1px;
+@message__border-style           : solid;
+@message__border-color           : @vars__grey-colour;
+@message__border-radius          : @vars__base--border-radius;
+@message__margin                 : 1em 0;
+@message__padding                : 1em 1.5em;
+@message__transition             : ~"opacity .2s ease,color .2s ease,background .2s ease,box-shadow .2s ease";
+
+@message__positive--background   : lighten(@vars__positive-colour, 37%);
+@message__positive--color        : darken(@vars__positive-colour, 15%);
+@message__positive--border-color : lighten(@vars__positive-colour, 10%);
+
+@message__negative--background   : lighten(@vars__negative-colour, 35%);
+@message__negative--color        : darken(@vars__negative-colour, 10%);
+@message__negative--border-color : lighten(@vars__negative-colour, 10%);
+
+@message__alert--background      : lighten(@vars__alert-colour, 38%);
+@message__alert--color           : darken(@vars__alert-colour, 15%);
+@message__alert--border-color    : lighten(@vars__alert-colour, 10%);
+
+@message__info--background       : lighten(@vars__info-colour, 40%);
+@message__info--color            : darken(@vars__info-colour, 15%);
+@message__info--border-color     : lighten(@vars__info-colour, 10%);
+
+/* ========================================================================
+   Component: Message
+ ========================================================================== */
+
+@{vars__prefix}.e-message {
+    position: relative;
+    min-height: 1em;
+    line-height: 1.3;
+    margin: @message__margin;
+    padding: @message__padding;
+    border: @message__border-color @message__border-style @message__border-width;
+    background: @message__background;
+    color: @message__color;
+    .border-radius(@message__border-radius);
+    .transition(@message__transition);
+    .hook-message;
+
+    *:last-child:not(.inline) {
+        margin-bottom: 0;
+    }
+
+}
+
+/* Sub-object: close
+ ========================================================================== */
+
+@{vars__prefix}.e-message .s-close {
+    .direction-mixin(float; right);
+    .hook-message-close;
+}
+
+/* Modifier: positive
+ ========================================================================== */
+
+@{vars__prefix}.e-message.m-positive {
+    background-color: @message__positive--background;
+    color: @message__positive--color;
+    border-color: @message__positive--border-color;
+    .hook-message-positive;
+}
+
+/* Modifier: negative
+ ========================================================================== */
+
+@{vars__prefix}.e-message.m-negative {
+    background-color: @message__negative--background;
+    color: @message__negative--color;
+    border-color: @message__negative--border-color;
+    .hook-message-negative;
+}
+
+/* Modifier: alert
+ ========================================================================== */
+
+@{vars__prefix}.e-message.m-alert {
+    background-color: @message__alert--background;
+    color: @message__alert--color;
+    border-color: @message__alert--border-color;
+    .hook-message-alert;
+}
+
+/* Modifier: info
+ ========================================================================== */
+
+@{vars__prefix}.e-message.m-info {
+    background-color: @message__info--background;
+    color: @message__info--color;
+    border-color: @message__info--border-color;
+    .hook-message-info;
+}
+
+/* Modifier: attached
+ ========================================================================== */
+
+@{vars__prefix}.e-message.m-attached {
+    margin: 0;
+    .border-radius(0);
+    .hook-message-attached;
+
+    &.m-bottom {
+        margin-top: -1px;
+        margin-bottom: 1em;
+        .border-bottom-radius(@message__border-radius);
+        .hook-message-attached-bottom;
+    }
+
+    &.m-top {
+        margin-bottom: -1px;
+        margin-top: 1em;
+        .border-top-radius(@message__border-radius);
+        .hook-message-attached-top;
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-message-misc;
+
+.hook-message() {}
+.hook-message-close() {}
+.hook-message-positive() {}
+.hook-message-negative() {}
+.hook-message-alert() {}
+.hook-message-info() {}
+.hook-message-attached() {}
+.hook-message-attached-top() {}
+.hook-message-attached-bottom() {}
+
+.hook-message-misc() {}

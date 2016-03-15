@@ -1,0 +1,77 @@
+// Name:            Dimmer
+// Description:     Styles the dimmer to look fancy
+//
+// Component:       `dimmer`
+//
+// Sub-object:      'text'
+//
+// Modifier:        'visible'
+//                  'loader'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@dimmer__loader--background  : rgba(0, 0, 0, 0.5);
+@dimmer__loader--padding-top : @loader__after--height + 1;
+
+/* ========================================================================
+   Component: Dimmer
+ ========================================================================== */
+
+@{vars__prefix}.e-dimmer {
+    position: absolute;
+    text-align: center;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    display: none;
+    background: @dimmer__loader--background;
+    z-index: @vars__dimmer--index;
+    .hook-dimmer;
+}
+
+/* Sub-object: text
+ ========================================================================== */
+
+@{vars__prefix}.e-dimmer .s-text {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    .hook-dimmer-text;
+}
+
+/* Modifier: visible
+ ========================================================================== */
+
+@{vars__prefix}.e-dimmer.is-visible {
+    display: block;
+    opacity: 1;
+    transition: opacity .5s linear;
+    .hook-dimmer-visible;
+}
+
+/* Modifier: loader
+ ========================================================================== */
+
+@{vars__prefix}.e-dimmer.has-loader .s-text {
+    padding-top: @dimmer__loader--padding-top;
+    .hook-dimmer-loader;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-dimmer-misc;
+
+.hook-dimmer() {}
+.hook-dimmer-text() {}
+.hook-dimmer-visible() {}
+.hook-dimmer-loader() {}
+
+.hook-dimmer-misc() {}

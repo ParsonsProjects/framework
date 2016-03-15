@@ -1,0 +1,112 @@
+// Name:            Inputs
+// Description:     Reset input and textarea to something nice
+//
+// Component:       `input`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@inputs__input--width                : 100%;
+@inputs__input--margin               : 0;
+@inputs__input--padding-vertical     : 0.5em;
+@inputs__input--padding-horizontal   : 0.75em;
+@inputs__input--padding              : @inputs__input--padding-vertical @inputs__input--padding-horizontal;
+@inputs__input--font-size            : 1em;
+@inputs__input--background-color     : #fff;
+@inputs__input--border               : 1px solid @vars__input--border-color;
+@inputs__input--border-color_focus   : @vars__input--border-color_focus;
+@inputs__input--outline              : none;
+@inputs__input--color                : rgba(0, 0, 0, 0.7);
+@inputs__input--border-radius        : @vars__base--border-radius;
+@inputs__input--transition           : ~"background-color 0.3s ease-out, box-shadow 0.2s ease, border-color 0.2s ease";
+@inputs__input--box-shadow--focus    : ~"inset 0em 0em 0.3em 0em @{vars__blue-colour}";
+@inputs__input--box-shadow--negative : ~"inset 0em 0em 0.3em 0em @{vars__negative-colour}";
+@inputs__input--box-shadow--positive : ~"inset 0em 0em 0.3em 0em @{vars__positive-colour}";
+@inputs__input--background--disabled : #f1f1f1;
+@inputs__input-placeholder--color    : #ccc;
+
+/* ========================================================================
+   Component: Inputs
+ ========================================================================== */
+
+select,
+textarea,
+input:not([type]),
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"] {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	width: @inputs__input--width;
+    margin: @inputs__input--margin;
+    padding: @inputs__input--padding;
+    font-size: @inputs__input--font-size;
+    background-color: @inputs__input--background-color;
+    border: @inputs__input--border;
+    outline: @inputs__input--outline;
+    color: @inputs__input--color;
+    .border-radius(@inputs__input--border-radius);
+    .transition(@inputs__input--transition);
+    .box-sizing(border-box);
+    .hook-inputs;
+}
+
+/* Reset height
+ * Must be after size modifiers
+ ========================================================================== */
+
+textarea,
+select[multiple],
+select[size] {
+    height: auto;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* browsers require these rules separate */
+input {
+    .placeholder(@inputs__input-placeholder--color);
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    border-color: @inputs__input--border-color_focus;
+    box-shadow: @inputs__input--box-shadow--focus;
+    .hook-inputs-focus;
+}
+
+select:disabled,
+textarea:disabled,
+input:disabled {
+    cursor: default;
+    opacity: 0.75;
+    color: darken(@inputs__input--color, 10%);
+    background: @inputs__input--background--disabled;
+    .hook-inputs-disabled;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-inputs-misc;
+
+.hook-inputs() {}
+.hook-inputs-focus() {}
+.hook-inputs-disabled() {}
+
+.hook-inputs-misc() {}

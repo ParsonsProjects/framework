@@ -1,0 +1,50 @@
+{
+  "name": "framework",
+  "filename": "jquery.framework.js",
+  "version": "1.4.4",
+  "description": "This framework is not here to build the site for you but is to give you the best possible start flattening out browser issues and making everything on a level field giving you the building blocks.",
+  "homepage": "https://github.com/ParsonsProjects/framework",
+  "main": "jquery.framework.js",
+  "authors": [
+    {
+      "name": "Alan Parsons",
+      "email": "parsonsprojects@outlook.com",
+      "homagepage": "http://www.parsonsprojects.co.uk/"
+    }
+  ],
+  "maintainers": [
+    "Alan Parsons <parsonsprojects@outlook.com>"
+  ],
+  "repositories": {
+    "type": "git",
+    "url": "https://github.com/ParsonsProjects/framework"
+  },
+  "keywords": [
+    "framework",
+    "css"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": ">=1.9"
+  },
+  "npmName": "fluidbox",
+  "npmFileMap": [
+    {
+      "basePath": "/dist/",
+      "files": [
+
+      ]
+    }
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "author": "Alan Parsons <parsonsprojects@outlook.com> (http://www.parsonsprojects.co.uk/)"
+}

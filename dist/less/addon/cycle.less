@@ -1,0 +1,54 @@
+
+.cycle {
+	position: relative;
+
+	.slide:not(:first-child) {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	.slide-content {
+		position: absolute;
+		display: block;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		z-index: 5;
+
+		&:after {
+			content: ' ';
+			display: inline-block;
+			vertical-align: middle;
+			height: 100%;
+		}
+
+	}
+
+	.inset {
+		display: block;
+		vertical-align: middle;
+		display: inline-block;
+	}
+
+	.inset > span {
+		display: inline-block;
+		visibility: hidden;
+		padding: 10px;
+		background: rgba(0,0,0,0.5);
+		color: #fff;
+		font-size: 2em;
+		opacity: 0;
+	}
+
+	.lt-ie9 & {
+
+		.inset > span {
+			visibility: visible;
+			opacity: 1;
+		}
+
+	}
+
+}

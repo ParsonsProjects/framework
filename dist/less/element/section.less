@@ -1,0 +1,183 @@
+// Name:            section
+// Description:     Styles the section to look fancy
+//
+// Component:       `section`
+//
+// Modifier:        'attached'
+//                  'inverted'
+//                  'blue'
+//                  'red'
+//                  'orange'
+//                  'yellow'
+//                  'purple'
+//                  'attached'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@section__border-width           : 1px;
+@section__border-style           : solid;
+@section__border-color           : #dadada;
+@section__margin                 : 1em 0;
+@section__padding                : 1em 1.5em;
+@section__border-radius          : @vars__base--border-radius;
+
+/* ========================================================================
+   Component: section
+ ========================================================================== */
+
+@{vars__prefix}.e-section {
+    position: relative;
+    min-height: 1em;
+    line-height: 1.3;
+    margin: @section__margin;
+    padding: @section__padding;
+    border: @section__border-color @section__border-style @section__border-width;
+    .border-radius(@section__border-radius);
+    .hook-section;
+
+    *:last-child:not(.inline) {
+        margin-bottom: 0;
+    }
+
+}
+
+/* Modifier: inverted
+ ========================================================================== */
+
+@{vars__prefix}.e-section.m-inverted {
+    background-color: contrast(@vars__body-background, #444);
+    color: contrast(contrast(@vars__body-background, #444), #444);
+    border-color: contrast(@vars__body-background);
+    .hook-section-inverted;
+}
+
+/* Modifier: blue
+ ========================================================================== */
+
+@{vars__prefix}.e-section.m-blue {
+    border-top-color: @vars__blue-colour;
+    border-top-width: 3px;
+    .hook-section-blue;
+
+    &.m-fill {
+        border-color: darken(@vars__blue-colour, 10%);
+        border-width: @section__border-width;
+        background-color: @vars__blue-colour;
+        color: contrast(@vars__blue-colour, #444444);
+    }
+
+}
+
+/* Modifier: red
+ ========================================================================== */
+
+@{vars__prefix}.e-section.m-red {
+    border-top-color: @vars__red-colour;
+    border-top-width: 3px;
+    .hook-section-red;
+
+    &.m-fill {
+        border-color: darken(@vars__red-colour, 10%);
+        border-width: @section__border-width;
+        background-color: @vars__red-colour;
+        color: contrast(@vars__red-colour, #444444);
+    }
+
+}
+
+/* Modifier: orange
+ ========================================================================== */
+
+@{vars__prefix}.e-section.m-orange {
+    border-top-color: @vars__orange-colour;
+    border-top-width: 3px;
+    .hook-section-orange;
+
+    &.m-fill {
+        border-color: darken(@vars__orange-colour, 10%);
+        border-width: @section__border-width;
+        background-color: @vars__orange-colour;
+        color: contrast(@vars__orange-colour, #444444);
+    }
+
+}
+
+/* Modifier: yellow
+ ========================================================================== */
+
+@{vars__prefix}.e-section.m-yellow {
+    border-top-color: @vars__yellow-colour;
+    border-top-width: 3px;
+    .hook-section-yellow;
+
+    &.m-fill {
+        border-color: darken(@vars__yellow-colour, 10%);
+        border-width: @section__border-width;
+        background-color: @vars__yellow-colour;
+        color: contrast(@vars__yellow-colour, #444444);
+    }
+
+}
+
+/* Modifier: purple
+ ========================================================================== */
+
+@{vars__prefix}.e-section.m-purple {
+    border-top-color: @vars__purple-colour;
+    border-top-width: 3px;
+    .hook-section-purple;
+
+    &.m-fill {
+        border-color: darken(@vars__purple-colour, 10%);
+        border-width: @section__border-width;
+        background-color: @vars__purple-colour;
+        color: contrast(@vars__purple-colour, #444444);
+    }
+
+}
+
+/* Modifier: attached
+ ========================================================================== */
+
+@{vars__prefix}.e-section.m-attached {
+    margin: -1px 0 0;
+    .border-radius(0);
+    .hook-section-attached;
+
+    &.m-bottom {
+        margin-top: -1px;
+        margin-bottom: 1em;
+        .border-bottom-radius(@section__border-radius);
+        .hook-section-attached-bottom;
+    }
+
+    &.m-top {
+        margin-bottom: -1px;
+        margin-top: 1em;
+        .border-top-radius(@section__border-radius);
+        .hook-section-attached-top;
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-section-misc;
+
+.hook-section() {}
+.hook-section-blue() {}
+.hook-section-red() {}
+.hook-section-orange() {}
+.hook-section-yellow() {}
+.hook-section-purple() {}
+.hook-section-inverted() {}
+
+.hook-section-attached() {}
+.hook-section-attached-bottom() {}
+.hook-section-attached-top() {}
+
+.hook-section-misc() {}

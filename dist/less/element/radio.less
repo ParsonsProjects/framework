@@ -1,0 +1,152 @@
+// Name:            radio
+// Description:     Styles the radio to look fancy
+//
+// Component:       `radio`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@radio__margin                                   : @field__margin;
+@radio__label--padding-left                      : 23px;
+
+@radio__label-before--height                     : 15px;
+@radio__label-before--width                      : 15px;
+@radio__label-before--border                     : 1px solid @vars__input--border-color;
+@radio__label-before--background                 : #fff;
+@radio__label-before--background_disabled        : #f1f1f1;
+
+@radio__label-after--height                      : 9px;
+@radio__label-after--width                       : 9px;
+@radio__label-after--background                  : @vars__input--border-color;
+@radio__label-after--background_checked          : #444;
+@radio__label-after--background_disabled-checked : darken(@vars__input--border-color, 10%);
+@radio__label-after--top                         : 4px;
+@radio__label-after--left                        : 4px;
+@radio__label-after--transform                   : ~"scale(0)";
+@radio__label-after--transform_hover             : ~"scale(1)";
+@radio__label-after--transform_checked           : ~"scale(1)";
+@radio__label-after--transform_disabled-hover    : ~"scale(0)";
+@radio__label-after--transform_disabled-checked  : ~"scale(1)";
+
+// IE8 doesnt like :checked
+
+/* ========================================================================
+   Component: radio
+ ========================================================================== */
+
+@{vars__prefix}.e-radio {
+    line-height: normal;
+    position: relative;
+    margin: @radio__margin;
+    .hook-radio;
+}
+
+@{vars__prefix}.e-radio .s-input {
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    .opacity(0);
+    .hook-radio-input;
+}
+
+@{vars__prefix}.e-radio .s-input:disabled {
+    cursor: default;
+}
+
+@{vars__prefix}.e-radio .s-label {
+    position: relative;
+    margin: 0;
+    .direction-mixin(padding-left; @radio__label--padding-left);
+    .hook-radio-label;
+}
+
+@{vars__prefix}.e-radio .s-input:disabled + .s-label {
+    .opacity(.2);
+}
+
+@{vars__prefix}.e-radio .s-label:before {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    width: @radio__label-before--height;
+    height: @radio__label-before--width;
+    border: @radio__label-before--border;
+    background: @radio__label-before--background;
+    .direction-mixin(left; 0);
+    .border-radius(50em);
+    .hook-radio-label-before;
+}
+
+@{vars__prefix}.e-radio .s-label:after {
+    content: ' ';
+    position: absolute;
+    visibility: hidden;
+    width: @radio__label-after--width;
+    height: @radio__label-after--height;
+    background: @radio__label-after--background;
+    top: @radio__label-after--top;
+    .direction-mixin(left; @radio__label-after--left);
+    .transform(@radio__label-after--transform);
+    .transition(all 0.2s ease);
+    .border-radius(50em);
+    .opacity(0);
+    .hook-radio-label-after;
+}
+
+@{vars__prefix}.e-radio .s-input:hover + .s-label:after {
+    visibility: visible;
+    .opacity(1);
+    .transform(@radio__label-after--transform_hover);
+    .hook-radio-label-after-hover;
+}
+
+@{vars__prefix}.e-radio .s-input:checked + .s-label:after {
+    visibility: visible;
+    background: @radio__label-after--background_checked;
+    .opacity(1);
+    .transform(@radio__label-after--transform_checked);
+    .hook-radio-label-after-checked;
+}
+
+@{vars__prefix}.e-radio .s-input:disabled + .s-label:before,
+@{vars__prefix}.e-radio .s-input:disabled:checked + .s-label:before {
+    background: @radio__label-before--background_disabled;
+    .hook-radio-label-before-disabled;
+}
+
+@{vars__prefix}.e-radio .s-input:disabled:hover + .s-label:after {
+    visibility: hidden;
+    .opacity(0);
+    .transform(@radio__label-after--transform_disabled-hover);
+    .hook-radio-label-after-disabled;
+}
+
+@{vars__prefix}.e-radio .s-input:disabled:checked + .s-label:after {
+    visibility: visible;
+    background: @radio__label-after--background_disabled-checked;
+    .opacity(1);
+    .transform(@radio__label-after--transform_disabled-checked);
+    .hook-radio-label-after-disabled-checked;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-radio-misc;
+
+.hook-radio() {}
+.hook-radio-input() {}
+.hook-radio-label() {}
+.hook-radio-label-before() {}
+.hook-radio-label-before-disabled() {}
+.hook-radio-label-after() {}
+.hook-radio-label-after-hover() {}
+.hook-radio-label-after-checked() {}
+.hook-radio-label-after-disabled() {}
+.hook-radio-label-after-disabled-checked() {}
+
+.hook-radio-misc() {}

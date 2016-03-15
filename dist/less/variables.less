@@ -1,0 +1,64 @@
+//
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@file__element--property_modifier : ;
+
+@vars__direction                  : ltr;
+@vars__prefix                     : ;
+@vars__ie8-support                : true;
+@vars__ie9-support                : true;
+@vars__CSS3-animations            : true; // see http://caniuse.com/#feat=css-animation
+
+// Colours
+// ========================================================================
+
+// colours from http              : //flatuicolors.com/
+@vars__red-colour                 : #e74c3c;
+@vars__yellow-colour              : #f1c40f;
+@vars__purple-colour              : #8e44ad;
+@vars__green-colour               : #8cc14c;
+@vars__blue-colour                : #3498db;
+@vars__orange-colour              : #e67e22;
+@vars__light-grey-colour          : #ecf0f1;
+@vars__grey-colour                : #bdc3c7;
+
+@vars__alert-colour               : @vars__orange-colour;
+@vars__negative-colour            : @vars__red-colour;
+@vars__info-colour                : @vars__blue-colour;
+@vars__positive-colour            : @vars__green-colour;
+
+@vars__brand-primary-colour       : #111949;
+@vars__brand-secondary-colour     : #444444;
+
+@vars__link--colour               : initial;
+@vars__link--colour_hover         : initial;
+
+@vars__body-background            : #ffffff;
+@vars__base--font-color           : contrast(@vars__body-background, #444444, #fcfcfc);
+
+// Fonts
+// ========================================================================
+
+@vars__sans--font-family          : Arial, Verdana, Helvetica, sans-serif;
+@vars__base--font-family          : @vars__sans--font-family ;
+@vars__base--font-size            : 14px;
+@vars__base--line-height          : 1.6;
+@vars__base--font-size--small     : @vars__base--font-size - 2;
+@vars__base--font-size--large     : @vars__base--font-size + 2;
+
+// Borders
+// ========================================================================
+
+@vars__base--border-radius        : 0.2em;
+@vars__input--border-color        : #dadada;
+@vars__input--border-color_focus  : @vars__blue-colour;
+
+// z-index
+// ========================================================================
+
+@vars__dimmer--index              : 800;
+@vars__dropdown--index            : 1000;
+@vars__sidebar--index             : 1010;
+@vars__modal--index               : 1020;

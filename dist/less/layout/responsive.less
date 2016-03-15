@@ -1,0 +1,70 @@
+// Name:            Responsive
+// Description:     Put all the responsive stuff in one place using hooks
+//
+// Component:       `responsive`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+// Extra small screen / phone
+@responsive__screen--xs-min             : 480px;
+
+// Small screen / tablet
+@responsive__screen--sm-min             : 768px;
+
+// Medium screen / desktop
+@responsive__screen--md-min             : 992px;
+
+// Large screen / wide desktop
+@responsive__screen--lg-min             : 1200px;
+
+// Large screen / wide desktop High Definition
+@responsive__screen--xl-min             : 1600px;
+
+// So media queries don't overlap when required, provide a maximum
+@responsive__screen--xs-max             : (@responsive__screen--sm-min - 1);
+@responsive__screen--sm-max             : (@responsive__screen--md-min - 1);
+@responsive__screen--md-max             : (@responsive__screen--lg-min - 1);
+@responsive__screen--lg-max             : (@responsive__screen--xl-min - 1);
+
+/* ========================================================================
+   Component: responsive
+ ========================================================================== */
+
+@media (min-width: @responsive__screen--sm-min) {
+  .hook-responsive-sm;
+}
+
+// Medium grid
+
+@media (min-width: @responsive__screen--md-min) {
+  .hook-responsive-md;
+}
+
+
+// Large grid
+
+@media (min-width: @responsive__screen--lg-min) {
+  .hook-responsive-lg;
+}
+
+
+// Extra Large grid
+
+@media (min-width: @responsive__screen--xl-min) {
+  .hook-responsive-xl;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-responsive-misc;
+
+.hook-responsive-sm() {}
+.hook-responsive-md() {}
+.hook-responsive-lg() {}
+.hook-responsive-xl() {}
+
+.hook-responsive-misc() {}

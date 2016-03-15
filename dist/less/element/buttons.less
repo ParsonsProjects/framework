@@ -1,0 +1,43 @@
+// Name:            Buttons
+// Description:     Styles the a group of buttons to look fancy
+//
+// Component:       `buttons`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+
+/* ========================================================================
+   Component: Button
+ ========================================================================== */
+
+@{vars__prefix}.e-buttons {
+    display: inline-block;
+    margin-right: 0.25em;
+    font-size: 0;
+    .hook-buttons;
+}
+
+@{vars__prefix}.e-buttons .e-button {
+    .border-radius(0);
+
+    &:first-child {
+        .border-left-radius(@button__border-radius);
+    }
+
+    &:last-child {
+        .border-right-radius(@button__border-radius);
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-buttons-misc;
+
+.hook-buttons() {}
+
+.hook-buttons-misc() {}

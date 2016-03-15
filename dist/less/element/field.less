@@ -1,0 +1,417 @@
+// Name:            Field
+// Description:     Styles the field to look fancy
+//
+// Component:       `field`
+//
+// Sub-object:      'control'
+//                  'icon'
+//                  'action'
+//
+// Modifier:        'negative'
+//                  'positive'
+//                  'disabled'
+//                  'loading'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@field__margin                             : 0 0 0.75em;
+@field__label--margin                      : 0 0 0.5em;
+
+@icon-input--padding-left                  : 2.25em;
+@icon-icon--width                          : 2em;
+@icon-icon--margin-top                     : -.55em;
+
+@field__action-button--padding             : (@inputs__input--padding-vertical + (1 / @vars__base--font-size)) (@inputs__input--padding-horizontal + (1 / @vars__base--font-size));
+
+@field__negative--color                    : @vars__negative-colour;
+@field__negative--border-color             : @vars__negative-colour;
+
+@field__positive--color                    : @vars__positive-colour;
+@field__positive--border-color             : @vars__positive-colour;
+
+@field__required--border-color             : @vars__negative-colour;
+@field__required--border-size              : 1.5em;
+@field__required--color                    : #fff;
+@field__required--font-size                : 1.3em;
+@field__required--right                    : 0.1em;
+
+@field__loading-before--background         : rgba(255,255,255,.5);
+@field__loading-after--margin              : -1.5em 0 0 -1.5em;
+@field__loading-after--height              : 1.5em;
+@field__loading-after--width               : @field__loading-after--height;
+@field__loading-after--margin              : -(@field__loading-after--height / 2) 0 0 -(@field__loading-after--width / 2);
+@field__loading-after--border-color        : #aaa rgba(0,0,0,.1) rgba(0,0,0,.1);
+@field__loading-after--border-width        : .2em;
+/* for .no-cssanimations */
+@field__loading--height                    : 16px;
+@field__loading--width                     : @field__loading--height;
+@field__loading--margin                    : -(@field__loading--height / 2) 0 0 -(@field__loading--width / 2);
+@field__loading--background-image          : url(../images/loaders/loader.gif);
+@field__loading--background-image_inverted : url(../images/loaders/loader-inverted.gif);
+
+/* ========================================================================
+   Component: Field
+ ========================================================================== */
+
+@{vars__prefix}.e-field {
+	line-height: normal;
+    margin: @field__margin;
+    .hook-field;
+}
+
+@{vars__prefix}.e-field:last-child:not(.u-inline) {
+    margin: 0;
+}
+
+@{vars__prefix}.e-field .s-label {
+	display: inline-block;
+    margin: @field__label--margin;
+    .hook-field-label;
+
+    &.u-inline {
+        margin: 0 .25em 0 0;
+    }
+
+}
+
+/* Sub-object: icon
+ ========================================================================== */
+
+@{vars__prefix}.s-control.has-icon {
+    position: relative;
+    .hook-field-control-icon;
+
+    &.m-prepend {
+
+        .s-input {
+            .direction-mixin(padding-left; @icon-input--padding-left);
+            .hook-field-control-icon-prepend-input;
+        }
+
+        .e-icon {
+            .direction-mixin(left; 0);
+        }
+
+    }
+
+    &.m-append {
+
+        .s-input {
+            .direction-mixin(padding-right; @icon-input--padding-left);
+            .hook-field-control-icon-append-input;
+        }
+
+        .e-icon {
+            .direction-mixin(right; 0);
+        }
+
+    }
+
+    .e-icon {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: @icon-icon--width;
+        .hook-field-control-icon-icon;
+
+        &:before {
+            position: absolute;
+            text-align: center;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            margin-top: @icon-icon--margin-top;
+            .hook-field-control-icon-icon-before;
+        }
+
+    }
+
+}
+
+/* Sub-object: action
+ ========================================================================== */
+
+@{vars__prefix}.s-control.has-action {
+    .clearfix;
+    .hook-field-control-action;
+
+    &.m-append {
+        .hook-field-control-action-append;
+
+        .s-input {
+            width: auto;
+            .direction-mixin(border-bottom-right-radius; 0);
+            .direction-mixin(border-top-right-radius; 0);
+            .direction-mixin(float; left);
+            .hook-field-control-action-append-input;
+        }
+
+        .e-button {
+            padding: @field__action-button--padding;
+            .direction-mixin(border-bottom-left-radius; 0);
+            .direction-mixin(border-top-left-radius; 0);
+            .direction-mixin(float; left);
+            .hook-field-control-action-append-button;
+        }
+
+    }
+
+    &.m-prepend {
+        .hook-field-control-action-prepend;
+
+        .s-input {
+            width: auto;
+            .direction-mixin(border-bottom-left-radius; 0);
+            .direction-mixin(border-top-left-radius; 0);
+            .direction-mixin(border-left; 0);
+            .hook-field-control-action-prepend-input;
+        }
+
+        .e-button {
+            padding: @field__action-button--padding;
+            .direction-mixin(border-bottom-right-radius; 0);
+            .direction-mixin(border-top-right-radius; 0);
+            .direction-mixin(float; left);
+            .hook-field-control-action-prepend-button;
+        }
+
+    }
+
+}
+
+/* Modifier: negative
+ ========================================================================== */
+
+@{vars__prefix}.e-field.is-negative {
+    .hook-field-negative;
+
+    .s-label {
+        color: @field__negative--color;
+        .hook-field-label-negative;
+    }
+
+    .s-input {
+        border-color: @field__negative--border-color;
+       .hook-field-input-negative;
+    }
+
+    .s-input:focus {
+        .box-shadow(@inputs__input--box-shadow--negative);
+    }
+
+    .e-badge {
+        color: #fff;
+        background: @field__negative--border-color;
+
+        &.is-pointing {
+
+            &.m-up:before {
+                border-bottom-color: @field__negative--border-color;
+            }
+
+            &.m-down:before {
+                border-top-color: @field__negative--border-color;
+            }
+
+            &.m-left:before {
+                border-right-color: @field__negative--border-color;
+            }
+
+            &.m-right:before {
+                border-left-color: @field__negative--border-color;
+            }
+
+        }
+
+    }
+
+}
+
+/* Modifier: positive
+ ========================================================================== */
+
+@{vars__prefix}.e-field.is-positive {
+    .hook-field-positive;
+
+    .s-label {
+        color: @field__positive--color;
+        .hook-field-label-positive;
+    }
+
+    .s-input {
+        border-color: @field__positive--border-color;
+       .hook-field-input-positive;
+    }
+
+    .s-input:focus {
+        .box-shadow(@inputs__input--box-shadow--positive);
+    }
+
+    .e-badge {
+        color: #fff;
+        background: @field__positive--border-color;
+
+        &.is-pointing {
+
+            &.m-up:before {
+                border-bottom-color: @field__positive--border-color;
+            }
+
+            &.m-down:before {
+                border-top-color: @field__positive--border-color;
+            }
+
+            &.m-left:before {
+                border-right-color: @field__positive--border-color;
+            }
+
+            &.m-right:before {
+                border-left-color: @field__positive--border-color;
+            }
+
+        }
+
+    }
+
+}
+
+/* Modifier: disabled
+ ========================================================================== */
+
+@{vars__prefix}.e-field.is-disabled {
+    .hook-field-disabled;
+
+    .label {
+        .opacity(.7);
+        .hook-field-label-disabled;
+    }
+
+}
+
+/* Modifier: loading
+ ========================================================================== */
+
+@{vars__prefix}.e-field.is-loading {
+    position: relative;
+    .hook-field-loading;
+
+    &:before {
+        position: absolute;
+        content: ' ';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: url(../images/ieBgFix.gif); // for IE
+        background: @field__loading-before--background;
+        .hook-field-loading-before;
+    }
+
+    &:after {
+        position: absolute;
+        content: ' ';
+        border-style: solid;
+        visibility: visible;
+        z-index: 101;
+        top: 50%;
+        left: 50%;
+
+        & when (@vars__CSS3-animations = true) {
+
+            .cssanimations & {
+                margin: @field__loading-after--margin;
+                width: @field__loading-after--width;
+                height: @field__loading-after--height;
+                border-color: @field__loading-after--border-color;
+                border-width: @field__loading-after--border-width;
+                .box-shadow(0 0 0 1px transparent);
+                .border-radius(500rem);
+                .animation(field-spin 1.2s linear);
+                .animation-iteration-count(infinite);
+                .box-sizing(border-box);
+            }
+
+        }
+
+        & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+            .no-cssanimations & {
+                border: none;
+                width: @field__loading--width;
+                height: @field__loading--height;
+                margin: @field__loading--margin;
+                background: @field__loading--background-image no-repeat center center;
+            }
+
+        }
+
+        .hook-field-loading-after;
+    }
+
+    & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+        .no-cssanimations &.inverted:after {
+            background-image: @field__loading--background-image_inverted;
+        }
+
+    }
+
+
+}
+
+& when (@vars__CSS3-animations = true) {
+
+    @-webkit-keyframes field-spin {
+        from { .transform(rotate(0deg)); }
+        to { .transform(rotate(360deg)); }
+    }
+
+    @keyframes field-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-field-misc;
+
+.hook-field() {}
+.hook-field-label() {}
+
+.hook-field-control-icon() {}
+.hook-field-control-icon-prepend-input() {}
+.hook-field-control-icon-append-input() {}
+.hook-field-control-icon-icon() {}
+.hook-field-control-icon-icon-before() {}
+
+.hook-field-control-action() {}
+.hook-field-control-action-append() {}
+.hook-field-control-action-append-input() {}
+.hook-field-control-action-append-button() {}
+.hook-field-control-action-prepend() {}
+.hook-field-control-action-prepend-input() {}
+.hook-field-control-action-prepend-button() {}
+
+.hook-field-negative() {}
+.hook-field-label-negative() {}
+.hook-field-input-negative() {}
+
+.hook-field-positive() {}
+.hook-field-label-positive() {}
+.hook-field-input-positive() {}
+
+.hook-field-disabled() {}
+.hook-field-label-disabled() {}
+
+.hook-field-loading() {}
+.hook-field-loading-before() {}
+.hook-field-loading-after() {}
+
+.hook-field-misc() {}

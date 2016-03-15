@@ -1,0 +1,458 @@
+// Name:            Button
+// Description:     Styles the button to look fancy
+//
+// Component:       `button`
+//
+// Modifier:        'positive'
+//                  'negative'
+//                  'disabled'
+//                  'blue'
+//                  'orange'
+//                  'yellow'
+//                  'purple'
+//                  'loading'
+//                  'inverted'
+//                  'circular'
+//                  'icon'
+//                  'basic'
+//                  'link'
+//                  'small'
+//                  'large'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@button__background-color                   : #dadada;
+@button__background-color_hover             : darken(@button__background-color, 10%);
+@button__color                              : contrast(@button__background-color, #444444);
+@button__color_hover                        : darken(@button__color, 10%);
+@button__margin                             : 0;
+@button__padding-vertical                   : .78571em;
+@button__padding-horizontal                 : 1.5em;
+@button__padding                            : @button__padding-vertical @button__padding-horizontal;
+@button__font-size                          : 1rem;
+@button__font-size--small                   : @vars__base--font-size--small;
+@button__font-size--large                   : @vars__base--font-size--large;
+@button__border-radius                      : @vars__base--border-radius;
+@button__opacity                            : ~"opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, background 0.25s ease";
+
+@button__positive--background               : @vars__positive-colour;
+@button__positive--color                    : #fff;
+@button__positive--color_hover              : #fff;
+
+@button__negative--background               : @vars__negative-colour;
+@button__negative--color                    : contrast(@vars__negative-colour, #444);
+
+@button__inverted--background               : contrast(@button__background-color, #444);
+@button__inverted--color                    : contrast(@button__inverted--background);
+
+@button__loading-after--height              : 1.2857em;
+@button__loading-after--width               : @button__loading-after--height;
+@button__loading-after--margin              : -(@button__loading-after--height / 2) 0 0 -(@button__loading-after--width / 2);
+/* for .no-cssanimations */
+@button__loading--height                    : 16px;
+@button__loading--width                     : @button__loading--height;
+@button__loading--margin                    : -(@button__loading--height / 2) 0 0 -(@button__loading--width / 2);
+@button__loading--background-image          : url(../images/loaders/loader.gif);
+@button__loading--background-image_inverted : url(../images/loaders/loader-inverted.gif);
+
+/* ========================================================================
+   Component: Button
+ ========================================================================== */
+
+@{vars__prefix}.e-button {
+    line-height: normal;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    outline: none;
+    border: none;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    min-height: 1em;
+    background-color: @button__background-color;
+    color: @button__color;
+    margin: @button__margin;
+    padding: @button__padding;
+    font-size: @button__font-size;
+    .border-radius(@button__border-radius);
+    .box-sizing(border-box);
+    .transition(@button__opacity);
+    .hook-button;
+}
+
+@{vars__prefix}.e-button:hover {
+    color: @button__color_hover;
+    background: @button__background-color_hover;
+    .hook-button-hover;
+}
+
+@{vars__prefix}.e-button .e-icon:first-child {
+    .direction-mixin(margin-right; 5px);
+}
+
+@{vars__prefix}.e-button .e-icon:last-child {
+    .direction-mixin(margin-left; 5px);
+}
+
+/* Modifier: positive
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-positive {
+    background-color: @button__positive--background;
+    color: @button__positive--color;
+    .hook-button-positive;
+
+    &:hover {
+        background-color: lighten(@button__positive--background, 10%);
+        color: @button__positive--color_hover;
+    }
+
+    &.m-basic:hover {
+        color: @button__positive--color;
+        border-color: @button__positive--color;
+    }
+
+    &.m-link {
+        color: @button__positive--color;
+    }
+
+}
+
+/* Modifier: negative
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-negative {
+    background-color: @button__negative--background;
+    color: @button__negative--color;
+    .hook-button-negative;
+
+    &:hover {
+        background-color: lighten(@button__negative--background, 10%);
+        color: contrast(@button__negative--background);
+    }
+
+    &.m-basic:hover {
+        color: @button__negative--color;
+        border-color: @button__negative--color;
+    }
+
+    &.m-link {
+        color: @button__negative--color;
+    }
+
+}
+
+/* Modifier: disabled
+ ========================================================================== */
+
+@{vars__prefix}.e-button.is-disabled {
+    cursor: default;
+    opacity: 0.7;
+    pointer-events: none;
+    .hook-button-disabled;
+}
+
+/* Modifier: blue
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-blue {
+    background-color: @vars__blue-colour;
+    color: contrast(@vars__blue-colour);
+    .hook-button-blue;
+
+    &:hover {
+        background-color: lighten(@vars__blue-colour, 10%);
+        color: contrast(@vars__blue-colour);
+    }
+
+    &.m-basic:hover {
+        color: @vars__blue-colour;
+        border-color: @vars__blue-colour;
+    }
+
+    &.m-link {
+        color: @vars__blue-colour;
+    }
+
+}
+
+/* Modifier: orange
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-orange {
+    background-color: @vars__orange-colour;
+    color: contrast(@vars__orange-colour);
+    .hook-button-orange;
+
+    &:hover {
+        background-color: lighten(@vars__orange-colour, 10%);
+        color: contrast(@vars__orange-colour);
+    }
+
+    &.m-basic:hover {
+        color: @vars__orange-colour;
+        border-color: @vars__orange-colour;
+    }
+
+    &.m-link {
+        color: @vars__orange-colour;
+    }
+
+}
+
+/* Modifier: yellow
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-yellow {
+    background-color: @vars__yellow-colour;
+    color: contrast(@vars__yellow-colour);
+    .hook-button-yellow;
+
+    &:hover {
+        background-color: lighten(@vars__yellow-colour, 10%);
+        color: contrast(@vars__yellow-colour);
+    }
+
+    &.m-basic:hover {
+        color: @vars__yellow-colour;
+        border-color: @vars__yellow-colour;
+    }
+
+    &.m-link {
+        color: @vars__yellow-colour;
+    }
+
+}
+
+/* Modifier: purple
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-purple {
+    background-color: @vars__purple-colour;
+    color: contrast(@vars__purple-colour);
+    .hook-button-purple;
+
+    &:hover {
+        background-color: lighten(@vars__purple-colour, 10%);
+        color: contrast(@vars__purple-colour);
+    }
+
+    &.m-basic:hover {
+        color: @vars__purple-colour;
+        border-color: @vars__purple-colour;
+    }
+
+    &.m-link {
+        color: @vars__purple-colour;
+    }
+
+}
+
+/* Modifier: inverted
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-inverted {
+    background-color: @button__inverted--background;
+    color: @button__inverted--color;
+    .hook-button-inverted;
+
+    &:hover {
+        background-color: lighten(@button__inverted--background, 10%);
+        color: contrast(@button__inverted--background);
+    }
+
+}
+
+/* Modifier: loading
+ ========================================================================== */
+
+@{vars__prefix}.e-button.is-loading {
+    position: relative;
+    cursor: default;
+    pointer-events: none;
+    .hook-button-loading;
+
+    & when (@vars__CSS3-animations = true) {
+
+        .cssanimations &:before {
+            position: absolute;
+            content: '';
+            top: 50%;
+            left: 50%;
+            border-radius: 500rem;
+            border: .2em solid rgba(0,0,0,.15);
+            margin: @button__loading-after--margin;
+            width: @button__loading-after--width;
+            height: @button__loading-after--height;
+            .box-sizing(border-box);
+            .hook-button-loading-before;
+        }
+
+    }
+
+    &:after {
+        position: absolute;
+        content: ' ';
+        top: 50%;
+        left: 50%;
+
+        & when (@vars__CSS3-animations = true) {
+
+            .cssanimations & {
+                border-color: #fff transparent transparent;
+                border-style: solid;
+                border-width: .2em;
+                margin: @button__loading-after--margin;
+                width: @button__loading-after--width;
+                height: @button__loading-after--height;
+                .box-shadow(0 0 0 1px transparent);
+                .border-radius(500rem);
+                .animation(button-spin 1.2s linear);
+                .animation-iteration-count(infinite);
+                .box-sizing(border-box);
+            }
+
+        }
+
+        & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+            .no-cssanimations & {
+                width: @button__loading--width;
+                height: @button__loading--height;
+                margin: @button__loading--margin;
+                background: @button__loading--background-image no-repeat center center;
+            }
+
+        }
+
+        .hook-button-loading-after;
+    }
+
+    & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+        .no-cssanimations &.inverted:after {
+            background-image: @button__loading--background-image_inverted;
+        }
+
+    }
+
+}
+
+& when (@vars__CSS3-animations = true) {
+
+    @-webkit-keyframes button-spin {
+        from { .transform(rotate(0deg)); }
+        to { .transform(rotate(360deg)); }
+    }
+
+    @keyframes button-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+}
+
+/* Modifier: circular
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-circular {
+    .border-radius(50em);
+    .hook-button-circular;
+}
+
+/* Modifier: inverted
+ ========================================================================== */
+
+@{vars__prefix}.e-button.has-icon {
+    padding: .78571em;
+    border: none;
+    .hook-button-icon;
+
+    .e-icon {
+        margin: 0;
+    }
+
+}
+
+/* Modifier: basic
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-basic {
+    background-color: transparent;
+    border: solid 2px @button__background-color;
+    padding: (@button__padding-vertical - (2 / @vars__base--font-size)) (@button__padding-horizontal - (2 / @vars__base--font-size));
+    color: @vars__base--font-color;
+    .hook-button-basic;
+
+    &:hover {
+        background-color: transparent;
+        color: @vars__base--font-color;
+        border-color: @button__background-color_hover;
+    }
+
+}
+
+/* Modifier: link
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-link {
+    background-color: transparent;
+    border: none;
+    color: @vars__base--font-color;
+    .hook-button-link;
+
+    &:hover {
+        background-color: transparent;
+        color: @vars__base--font-color;
+    }
+
+}
+
+/* Modifier: small
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-small {
+    font-size: @button__font-size--small;
+    .hook-button-small;
+}
+
+/* Modifier: large
+ ========================================================================== */
+
+@{vars__prefix}.e-button.m-large {
+    font-size: @button__font-size--large;
+    .hook-button-large;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-button-misc;
+
+.hook-button() {}
+.hook-button-hover() {}
+
+.hook-button-positive() {}
+.hook-button-negative() {}
+.hook-button-disabled() {}
+.hook-button-blue() {}
+.hook-button-orange() {}
+.hook-button-yellow() {}
+.hook-button-purple() {}
+.hook-button-loading() {}
+.hook-button-loading-before() {}
+.hook-button-loading-after() {}
+.hook-button-inverted() {}
+.hook-button-circular() {}
+.hook-button-icon() {}
+.hook-button-basic() {}
+.hook-button-link() {}
+.hook-button-small() {}
+.hook-button-large() {}
+
+.hook-button-misc() {}

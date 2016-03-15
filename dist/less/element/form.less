@@ -1,0 +1,176 @@
+// Name:            Form
+// Description:     Styles the form to look fancy
+//
+// Component:       `form`
+//
+// Sub-object:      'fieldset'
+//                  'field'
+//                  'legend'
+//
+// Modifier:        'negative'
+//                  'positive'
+//                  'disabled'
+//                  'loading'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@form__margin                             : 0 0 1em;
+
+@form__fieldset--padding                  : 1em;
+@form__fieldset--margin                   : 0 0 1em;
+@form__fieldset--border                   : 1px solid @vars__input--border-color;
+@form__fieldset--border-radius            : @vars__base--border-radius;
+
+@form__legend--font-size                  : 1.5em;
+
+@form__loading-before--background         : rgba(255,255,255,.5);
+@form__loading-after--margin              : -1.5em 0 0 -1.5em;
+@form__loading-after--height              : 3em;
+@form__loading-after--width               : @form__loading-after--height;
+@form__loading-after--margin              : -(@form__loading-after--height / 2) 0 0 -(@form__loading-after--width / 2);
+@form__loading-after--border-color        : #aaa rgba(0,0,0,.1) rgba(0,0,0,.1);
+@form__loading-after--border-width        : .2em;
+/* for .no-cssanimations */
+@form__loading--height                    : 16px;
+@form__loading--width                     : @form__loading--height;
+@form__loading--margin                    : -(@form__loading--height / 2) 0 0 -(@form__loading--width / 2);
+@form__loading--background-image          : url(../images/loaders/loader.gif);
+@form__loading--background-image_inverted : url(../images/loaders/loader-inverted.gif);
+
+/* ========================================================================
+   Component: Form
+ ========================================================================== */
+
+@{vars__prefix}.e-form {
+    margin: @form__margin;
+    .hook-form;
+}
+
+/* Sub-object: fieldset
+ ========================================================================== */
+
+@{vars__prefix}.e-form fieldset {
+    padding: @form__fieldset--padding;
+    margin: @form__fieldset--margin;
+    border: @form__fieldset--border;
+    .border-radius(@form__fieldset--border-radius);
+    .hook-fieldset;
+
+    &.attached.top {
+        margin-bottom: 0;
+    }
+
+}
+
+/* Sub-object: legend
+ ========================================================================== */
+
+@{vars__prefix}.e-form legend {
+    font-size: @form__legend--font-size;
+    .hook-legend;
+}
+
+/* Modifier: loading
+ ========================================================================== */
+
+@{vars__prefix}.e-form.is-loading {
+    position: relative;
+    .hook-form-loading;
+
+    &:before {
+        position: absolute;
+        content: ' ';
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        background: url(../images/ieBgFix.gif); // for IE
+        background: @form__loading-before--background;
+        .hook-form-loading-before;
+    }
+
+    &:after {
+        position: absolute;
+        content: ' ';
+        border-style: solid;
+        visibility: visible;
+        z-index: 101;
+        top: 50%;
+        left: 50%;
+
+        & when (@vars__CSS3-animations = true) {
+
+            .cssanimations & {
+                margin: @form__loading-after--margin;
+                width: @form__loading-after--width;
+                height: @form__loading-after--height;
+                border-color: @form__loading-after--border-color;
+                border-width: @form__loading-after--border-width;
+                .box-shadow(0 0 0 1px transparent);
+                .border-radius(500rem);
+                .animation(form-spin 1.2s linear);
+                .animation-iteration-count(infinite);
+                .box-sizing(border-box);
+            }
+
+        }
+
+        & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+            .no-cssanimations & {
+                border: none;
+                width: @form__loading--width;
+                height: @form__loading--height;
+                margin: @form__loading--margin;
+                background: @form__loading--background-image no-repeat center center;
+            }
+
+        }
+
+        .hook-form-loading-after;
+    }
+
+    & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+        .no-cssanimations &.inverted:after {
+            background-image: @form__loading--background-image_inverted;
+        }
+
+    }
+
+
+}
+
+& when (@vars__CSS3-animations = true) {
+
+    @-webkit-keyframes form-spin {
+        from { .transform(rotate(0deg)); }
+        to { .transform(rotate(360deg)); }
+    }
+
+    @keyframes form-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+}
+
+
+// Hooks
+// --------------------------------------------------
+.hook-form-misc;
+
+.hook-form() {}
+.hook-fieldset() {}
+.hook-legend() {}
+
+.hook-form-loading() {}
+.hook-form-loading-before() {}
+.hook-form-loading-after() {}
+
+.hook-form-misc() {}

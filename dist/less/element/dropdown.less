@@ -1,0 +1,152 @@
+// Name:            Dropdown
+// Description:     Styles the dropdown to look fancy
+//
+// Component:       `dropdown`
+//
+// Sub-object:      'menu'
+//                  'item'
+//                  'icon'
+//
+// Modifier:        'vertical'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@dropdown__menu--offset          : -1px; // -1px to account for border;
+@dropdown__menu--width           : 200px;
+@dropdown__menu--margin          : -10px 0 0;
+@dropdown__menu--border          : 1px solid #dadada;
+@dropdown__menu--background      : @vars__body-background;
+@dropdown__menu--border-radius   : @vars__base--border-radius;
+@dropdown__menu--transition      : ~"all .25s ease-in-out";
+@dropdown__menu-item--border-top : 1px solid #dadada;
+@dropdown__vertical-menu--margin : 0 0 0 -10px;
+
+/* ========================================================================
+   Component: Dropdown
+ ========================================================================== */
+
+@{vars__prefix}.e-dropdown {
+    position: relative;
+    z-index: @vars__dropdown--index;
+    .hook-dropdown;
+
+    &:hover {
+        z-index: (@vars__dropdown--index + 5);
+        .hook-dropdown-hover;
+    }
+
+}
+
+/* Sub-object: menu
+ ========================================================================== */
+
+@{vars__prefix}.e-dropdown .e-menu {
+    list-style: none;
+    display: none;
+    top: 100%;
+    padding: 0;
+    border: @dropdown__menu--border;
+    background: @dropdown__menu--background;
+    .direction-mixin(left; @dropdown__menu--offset);
+    .border-radius(@dropdown__menu--border-radius);
+    .transition(@dropdown__menu--transition);
+    .hook-dropdown-menu;
+}
+
+.hook-responsive-md() {
+
+    @{vars__prefix}.e-dropdown .e-menu {
+        visibility: hidden;
+        position: absolute;
+        display: block;
+        opacity: 0;
+        width: @dropdown__menu--width;
+        margin: @dropdown__menu--margin;
+        .hook-dropdown-menu-md;
+    }
+
+}
+
+/* Sub-object: icon
+ ========================================================================== */
+
+@{vars__prefix}.e-dropdown .s-link.has-icon {
+    .direction-mixin(padding-right; ((@menu__link--padding-right * 2) + 1));
+}
+
+@{vars__prefix}.e-dropdown .e-icon.has-dropdown {
+    text-align: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    padding: @menu__link--padding;
+    .direction-mixin(right; 0);
+    .hook-dropdown-icon;
+}
+
+/* Sub-object: item
+ ========================================================================== */
+
+@{vars__prefix}.e-dropdown .e-menu .s-item {
+    float: none;
+    border: none;
+    border-top: @dropdown__menu-item--border-top;
+    .hook-dropdown-item;
+
+    &:first-child {
+        border-top: none;
+    }
+
+}
+
+/* Modifier: vertical
+ ========================================================================== */
+
+@{vars__prefix}.e-dropdown.m-vertical .e-menu {
+    right: auto;
+    top: @dropdown__menu--offset;
+    .direction-mixin(left; 100%);
+    .hook-dropdown-vertical-menu;
+}
+
+.hook-responsive-md() {
+
+    @{vars__prefix}.e-dropdown.m-vertical .e-menu {
+        width: @dropdown__menu--width;
+        margin: @dropdown__vertical-menu--margin;
+        .hook-dropdown-vertical-menu-md;
+    }
+
+}
+
+.hook-responsive-md() {
+
+    // placed after to make sure it resets correctly
+    @{vars__prefix}.e-dropdown:hover > .e-menu {
+        visibility: visible;
+        margin: 0;
+        opacity: 1;
+        .hook-dropdown-vertical-menu-hover-md;
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-dropdown-misc;
+
+.hook-dropdown() {}
+.hook-dropdown-hover() {}
+.hook-dropdown-menu() {}
+.hook-dropdown-menu-md() {}
+.hook-dropdown-icon() {}
+.hook-dropdown-item() {}
+.hook-dropdown-vertical-menu() {}
+.hook-dropdown-vertical-menu-md() {}
+.hook-dropdown-vertical-menu-hover-md() {}
+
+.hook-dropdown-misc() {}

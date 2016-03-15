@@ -1,0 +1,152 @@
+// Name:            content
+// Description:     Styles the content to look fancy
+//
+// Component:       `content`
+//
+// Sub-object:      'content'
+//                  'overlay'
+//                  'body'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@sidebar__padding               : 1.5rem;
+
+@sidebar__overlay--background   : #000000;
+@sidebar__overlay--transition   : ~"all 0.5s ease-out";
+
+@sidebar__content--transition   : ~"all 0.5s ease-out";
+@sidebar__content--width        : 320px;
+@sidebar__content--background   : #fefefe;
+
+@sidebar__header--font-size     : 1.5em;
+@sidebar__header--border-bottom : @vars__light-grey-colour solid 1px;
+@sidebar__header--padding       : @sidebar__padding;
+
+@sidebar__body--padding         : @sidebar__padding;
+
+@sidebar__footer--padding       : @sidebar__padding;
+@sidebar__footer--border-top    : @vars__light-grey-colour solid 1px;
+
+/* ========================================================================
+   Component: content
+ ========================================================================== */
+
+@{vars__prefix}.e-sidebar {
+    // fixed to stop the page jumping
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: @vars__sidebar--index;
+    .hook-sidebar;
+
+    &:target,
+    &.is-in {
+
+        // Active animate in content
+        .s-overlay {
+            opacity: 1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            .hook-sidebar-overlay-target;
+        }
+
+        .s-content {
+            left: 0;
+            .hook-sidebar-content-target;
+        }
+
+    }
+
+}
+
+/* Sub-object: overlay
+ ========================================================================== */
+
+// This is content bg
+@{vars__prefix}.e-sidebar .s-overlay {
+    content: ' ';
+    position: fixed;
+    opacity: 0;
+    background: @sidebar__overlay--background;
+    background: rgba(red(@sidebar__overlay--background), green(@sidebar__overlay--background), blue(@sidebar__overlay--background), .6);
+    .transition(@sidebar__overlay--transition);
+    .hook-sidebar-overlay;
+}
+
+/* Sub-object: close
+ ========================================================================== */
+
+@{vars__prefix}.e-sidebar .s-close:not(.e-button) {
+    text-decoration: none;
+    color: @vars__base--font-color;
+    .direction-mixin(float; right);
+    .hook-sidebar-close;
+}
+
+/* Sub-object: content
+ ========================================================================== */
+
+@{vars__prefix}.e-sidebar .s-content {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: -@sidebar__content--width;
+      width: @sidebar__content--width;
+      background: @sidebar__content--background;
+      .transition(@sidebar__content--transition);
+      .hook-sidebar-content;
+}
+
+/* Sub-object: body
+ ========================================================================== */
+
+@{vars__prefix}.e-sidebar .s-body {
+    overflow: auto;
+    padding: @sidebar__body--padding;
+    .hook-sidebar-body;
+}
+
+/* Sub-object: header
+ ========================================================================== */
+
+@{vars__prefix}.e-sidebar .s-header {
+    font-size: @sidebar__header--font-size;
+    border-bottom: @sidebar__header--border-bottom;
+    padding: @sidebar__header--padding;
+    .hook-sidebar-header;
+}
+
+/* Sub-object: footer
+ ========================================================================== */
+
+@{vars__prefix}.e-sidebar .s-footer {
+    text-align: right;
+    border-top: @sidebar__footer--border-top;
+    padding: @sidebar__footer--padding;
+    .hook-sidebar-footer;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-sidebar-misc;
+
+.hook-sidebar() {}
+
+.hook-sidebar-overlay() {}
+.hook-sidebar-overlay-target() {}
+
+.hook-sidebar-content() {}
+.hook-sidebar-content-target() {}
+
+.hook-sidebar-header() {}
+.hook-sidebar-close() {}
+.hook-sidebar-body() {}
+.hook-sidebar-footer() {}
+
+.hook-sidebar-misc() {}

@@ -1,0 +1,196 @@
+// Name:            Modal
+// Description:     Styles the modal to look fancy
+//
+// Component:       `modal`
+//
+// Sub-object:      'content'
+//                  'overlay'
+//                  'close'
+//                  'header'
+//                  'body'
+//                  'footer'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@modal__padding                : 1.5rem;
+
+@modal__overlay--background    : #000000;
+@modal__overlay--transition    : ~"all 0.5s ease-out";
+
+@modal__content--offset        : 5%;
+@modal__content--transition    : ~"all 0.5s ease-out";
+@modal__content--width         : 60vw;
+@modal__content--background    : #fefefe;
+@modal__content--border-radius : @vars__base--border-radius;
+
+@modal__header--font-size      : 1.5em;
+@modal__header--border-bottom  : @vars__light-grey-colour solid 1px;
+@modal__header--padding        : @modal__padding;
+@modal__ie8-header--padding    : (unit(@modal__padding) * @vars__base--font-size);
+
+@modal__body--padding          : @modal__padding;
+@modal__ie8-body--padding      : (unit(@modal__padding) * @vars__base--font-size);
+
+@modal__footer--padding        : @modal__padding;
+@modal__ie8-footer--padding    : (unit(@modal__padding) * @vars__base--font-size);
+@modal__footer--border-top     : @vars__light-grey-colour solid 1px;
+
+/* ========================================================================
+   Component: Modal
+ ========================================================================== */
+
+.overflow {
+    overflow: hidden;
+}
+
+@{vars__prefix}.e-modal {
+    // fixed to stop the page jumping
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: @vars__modal--index;
+    .hook-modal;
+
+    &:target,
+    &.is-in {
+
+        // Active animate in modal
+        .s-overlay {
+            opacity: 1;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            .hook-modal-overlay-target;
+        }
+
+        .s-content {
+            top: @modal__content--offset;
+            .hook-modal-content-target;
+        }
+
+    }
+
+}
+
+/* Sub-object: overlay
+ ========================================================================== */
+
+// This is modal bg
+@{vars__prefix}.e-modal .s-overlay {
+    content: ' ';
+    position: fixed;
+    opacity: 0;
+    background: @modal__overlay--background;
+    background: rgba(red(@modal__overlay--background), green(@modal__overlay--background), blue(@modal__overlay--background), .6);
+    .transition(@modal__overlay--transition);
+    .hook-modal-overlay;
+}
+
+/* Sub-object: close
+ ========================================================================== */
+
+@{vars__prefix}.e-modal .s-close:not(.e-button) {
+    text-decoration: none;
+    color: @vars__base--font-color;
+    .direction-mixin(float; right);
+    .hook-modal-close;
+}
+
+/* Sub-object: content
+ ========================================================================== */
+
+@{vars__prefix}.e-modal .s-content {
+      position: fixed;
+      left: 50%;
+      top: -100%;
+      width: @modal__content--width;
+      margin-left: -(@modal__content--width / 2);
+      background: @modal__content--background;
+      border-radius: @modal__content--border-radius;
+      .transition(@modal__content--transition);
+      .hook-modal-content;
+}
+
+/* Sub-object: body
+ ========================================================================== */
+
+@{vars__prefix}.e-modal .s-body {
+    overflow: auto;
+    padding: @modal__body--padding;
+
+    & when (@vars__ie8-support = true) {
+        .lt-ie9 & {
+            padding: @modal__ie8-body--padding;
+        }
+    }
+
+    .hook-modal-body;
+}
+
+.hook-responsive-md() {
+
+    @{vars__prefix}.e-modal .s-body {
+        max-height: 40vh;
+        .hook-modal-body-md;
+    }
+
+}
+
+/* Sub-object: header
+ ========================================================================== */
+
+@{vars__prefix}.e-modal .s-header {
+    font-size: @modal__header--font-size;
+    border-bottom: @modal__header--border-bottom;
+    padding: @modal__header--padding;
+
+    & when (@vars__ie8-support = true) {
+        .lt-ie9 & {
+            padding: @modal__ie8-header--padding;
+        }
+    }
+
+    .hook-modal-header;
+}
+
+/* Sub-object: footer
+ ========================================================================== */
+
+@{vars__prefix}.e-modal .s-footer {
+    text-align: right;
+    border-top: @modal__footer--border-top;
+    padding: @modal__footer--padding;
+
+    & when (@vars__ie8-support = true) {
+        .lt-ie9 & {
+            padding: @modal__ie8-footer--padding;
+        }
+    }
+
+    .hook-modal-footer;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-modal-misc;
+
+.hook-modal() {}
+
+.hook-modal-overlay() {}
+.hook-modal-overlay-target() {}
+
+.hook-modal-content() {}
+.hook-modal-content-target() {}
+
+.hook-modal-header() {}
+.hook-modal-close() {}
+.hook-modal-body() {}
+.hook-modal-body-md() {}
+.hook-modal-footer() {}
+
+.hook-modal-misc() {}

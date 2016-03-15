@@ -1,0 +1,51 @@
+// Name:            Accordion
+// Description:     Styles the accordion to look fancy
+//
+// Component:       `accordion`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+/* ========================================================================
+   Component: Tab
+ ========================================================================== */
+
+@{vars__prefix}.e-accordion .s-target {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    &:target + .s-content {
+        display: block;
+    }
+
+    &:not(:target) + .s-content {
+        display: none;
+    }
+
+    &.is-current + .s-content {
+        display: block;
+    }
+
+}
+
+/* Sub-object: title
+ ========================================================================== */
+
+@{vars__prefix}.e-accordion .s-title {
+    display: block;
+    .hook-accordion-title;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-accordion-misc;
+
+.hook-accordion() {}
+.hook-accordion-title() {}
+
+.hook-accordion-misc() {}

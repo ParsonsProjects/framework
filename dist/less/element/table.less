@@ -1,0 +1,67 @@
+// Name:            Table
+// Description:     Styles the table to look fancy
+//
+// Component:       `table`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@table__margin                : 0 0 1em;
+@table__cell--padding         : 5px;
+@table__cell--border          : 1px solid #cbcbcb;
+@table__cell-even--background : #eee;
+@table__cell-head--background : #dbdbdb;
+
+/* ========================================================================
+   Component: Table
+ ========================================================================== */
+
+@{vars__prefix}.e-table {
+    display: table;
+    border-collapse: collapse;
+    width: 100%;
+    margin: @table__margin;
+    .hook-table;
+}
+
+@{vars__prefix}.e-table tr,
+@{vars__prefix}.e-table .s-row {
+    display: table-row;
+    .hook-table-row;
+}
+
+@{vars__prefix}.e-table thead th,
+@{vars__prefix}.e-table .s-cell.m-head {
+    background: @table__cell-head--background;
+    .hook-table-cell;
+}
+
+@{vars__prefix}.e-table tbody tr:nth-child(even),
+@{vars__prefix}.e-table.m-striped *:not(thead) .s-row:nth-child(even) {
+    background: @table__cell-even--background;
+    .hook-table-cell;
+}
+
+@{vars__prefix}.e-table td,
+@{vars__prefix}.e-table th,
+@{vars__prefix}.e-table .s-cell {
+    display: table-cell;
+    padding: @table__cell--padding;
+    border: @table__cell--border;
+    .direction-mixin(text-align; left);
+    .hook-table-striped-row;
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-table-misc;
+
+.hook-table() {}
+.hook-table-row() {}
+.hook-table-cell() {}
+.hook-table-striped-row() {}
+
+.hook-table-misc() {}

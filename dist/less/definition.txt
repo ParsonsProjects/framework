@@ -1,0 +1,10 @@
+Default		These components generally normalize HTML elements for cross browser functionality and add some very basic styling
+Layout		Apply our fully responsive fluid grid system and panels and useful utility classes.
+Element	        A basic building block of a website, exists alone or in homogenous groups
+Collection	A heterogeneous group of several elements which can usually be found together.
+View		A way to present common website content like comments, activity feeds
+Addon		An element that is not based within the core structure but can be added ontop of the core
+
+Component	Components abstract recurring parts of a website into class-based modules, like buttons for example. These can be reused and combined.
+Sub-object	Sub-objects are placed within a component to enhance its funtionality, for example a close button in an alert box.
+Modifier	Modifier classes alter the style of components and their sub-objects, like button colors and sizes.

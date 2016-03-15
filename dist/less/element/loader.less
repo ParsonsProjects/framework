@@ -1,0 +1,124 @@
+// Name:            Loader
+// Description:     Styles the loader to look fancy
+//
+// Component:       `loader`
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@loader__after--height             : 4.2857em;
+@loader__after--width              : @loader__after--height;
+@loader__after--margin             : 0 0 0 -(@loader__after--height / 2);
+/* for .no-cssanimations */
+@loader__height                    : 16px;
+@loader__width                     : @loader__height;
+@loader__margin                    : 0 0 0 -(@loader__width / 2);
+@loader__background-image          : url(../images/loaders/loader.gif);
+@loader__background-image_inverted : url(../images/loaders/loader-inverted.gif);
+
+/* ========================================================================
+   Component: Loader
+ ========================================================================== */
+
+@{vars__prefix}.e-loader {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    .hook-loader;
+}
+
+& when (@vars__CSS3-animations = true) {
+
+    .cssanimations @{vars__prefix}.e-loader:before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 50%;
+        border-radius: 500rem;
+        border: .2em solid rgba(0,0,0,.15);
+        margin: @loader__after--margin;
+        width: @loader__after--width;
+        height: @loader__after--height;
+        .box-sizing(border-box);
+        .hook-loader-before;
+    }
+
+}
+
+@{vars__prefix}.e-loader {
+
+    &:after {
+        position: absolute;
+        content: ' ';
+        top: 0;
+        left: 50%;
+
+        & when (@vars__CSS3-animations = true) {
+
+            .cssanimations & {
+                border-color: #fff transparent transparent;
+                border-style: solid;
+                border-width: .2em;
+                margin: @loader__after--margin;
+                width: @loader__after--width;
+                height: @loader__after--height;
+                .box-shadow(0 0 0 1px transparent);
+                .border-radius(500rem);
+                .animation(button-spin 1.2s linear);
+                .animation-iteration-count(infinite);
+                .box-sizing(border-box);
+            }
+
+        }
+
+        & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+            .no-cssanimations & {
+                width: @loader__width;
+                height: @loader__height;
+                margin: @loader__margin;
+                background: @loader__background-image no-repeat center center;
+            }
+
+        }
+
+        .hook-loader-after;
+    }
+
+    & when (@vars__ie9-support = true), (@vars__CSS3-animations = false) {
+
+        .no-cssanimations &.inverted:after {
+            background-image: @loader__background-image_inverted;
+        }
+
+    }
+
+}
+
+& when (@vars__CSS3-animations = true) {
+
+    @-webkit-keyframes loader-spin {
+        from { .transform(rotate(0deg)); }
+        to { .transform(rotate(360deg)); }
+    }
+
+    @keyframes loader-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-loader-misc;
+
+.hook-loader() {}
+.hook-loader-before() {}
+.hook-loader-after() {}
+
+.hook-loader-misc() {}

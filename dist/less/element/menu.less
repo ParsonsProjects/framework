@@ -1,0 +1,181 @@
+// Name:            Menu
+// Description:     Styles the menu to look fancy
+//
+// Component:       `menu`
+//
+// Sub-object:      'item'
+//                  'link'
+//
+// Modifier:        'vertical'
+//                  'tabular'
+//
+// ========================================================================
+
+// Variables
+// @file__element--property_modifier
+// ========================================================================
+
+@menu__border                    : 1px solid #dadada;
+@menu__border-radius             : @vars__base--border-radius;
+@menu__background                : @vars__body-background;
+
+@menu__item--border              : 1px solid #dadada;
+@menu__item--background_current  : #f1f1f1;
+
+@menu__link--padding-top         : .75em;
+@menu__link--padding-left        : .75em;
+@menu__link--padding-right       : .75em;
+@menu__link--padding-bottom      : .75em;
+@menu__link--padding             : @menu__link--padding-top @menu__link--padding-right @menu__link--padding-bottom @menu__link--padding-left;
+@menu__link--color               : @vars__base--font-color;
+@menu__link--background_hover    : #f1f1f1;
+
+@menu__vertical-item--border-top : 1px solid #dadada;
+
+/* ========================================================================
+   Component: Menu
+ ========================================================================== */
+
+@{vars__prefix}.e-menu {
+    list-style: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: @menu__background;
+    .border-radius(@menu__border-radius);
+    .clearfix;
+    .hook-menu;
+}
+
+.hook-responsive-md() {
+
+    @{vars__prefix}.e-menu {
+        border: @menu__border;
+        .hook-menu-md;
+    }
+
+}
+
+/* Sub-object: item
+ ========================================================================== */
+
+@{vars__prefix}.e-menu .s-item {
+    line-height: normal;
+    list-style: none;
+    padding: 0;
+    margin: -1px 0 0;
+    border: @menu__item--border;
+    .hook-menu-item;
+
+    &.is-current {
+        background: @menu__item--background_current;
+        .hook-menu-item-current;
+    }
+
+}
+
+.hook-responsive-md() {
+
+    @{vars__prefix}.e-menu .s-item {
+        margin: 0;
+        border-top: none;
+        border-bottom: none;
+        .direction-mixin(float; left);
+        .direction-mixin(border-left; none);
+        .hook-menu-item-md;
+    }
+
+}
+
+/* Sub-object: link
+ ========================================================================== */
+
+@{vars__prefix}.e-menu .s-link {
+    display: block;
+    text-decoration: none;
+    color: @menu__link--color;
+    padding: @menu__link--padding;
+    .hook-menu-link;
+
+    &:hover[href] {
+        background: @menu__link--background_hover;
+        .hook-menu-link-hover;
+    }
+
+}
+
+/* Modifier: vertical
+ ========================================================================== */
+
+.hook-responsive-md() {
+
+    @{vars__prefix}.e-menu.m-vertical {
+        .hook-menu-vertical;
+
+        .s-item {
+            float: none;
+            border: none;
+            border-top: @menu__vertical-item--border-top;
+            .hook-menu-vertical-item;
+
+            &:first-child {
+                border-top: none;
+            }
+
+        }
+
+    }
+
+}
+
+/* Modifier: tabular
+ ========================================================================== */
+
+.hook-responsive-md() {
+
+    @{vars__prefix}.e-menu.m-tabular {
+        border: none;
+        border-bottom: @menu__border;
+        .hook-menu-tabular;
+
+        > .s-item {
+            border: none;
+            position: relative;
+            z-index: 10;
+
+            &.is-current {
+                background: none;
+                border: 1px solid #dadada;
+                border-bottom: 1px solid #fff;
+                margin-bottom: -1px;
+                .border-top-radius(@menu__border-radius);
+                .hook-menu-tabular-item-current;
+            }
+
+        }
+
+    }
+
+}
+
+// Hooks
+// --------------------------------------------------
+.hook-menu-misc;
+
+.hook-menu() {}
+.hook-menu-md() {}
+
+.hook-menu-item() {}
+.hook-menu-item-current() {}
+.hook-menu-item-md() {}
+
+.hook-menu-link() {}
+.hook-menu-link-hover() {}
+
+.hook-menu-vertical() {}
+.hook-menu-vertical-item() {}
+
+.hook-menu-tabular() {}
+.hook-menu-tabular-item-current() {}
+
+.hook-menu-misc() {}
